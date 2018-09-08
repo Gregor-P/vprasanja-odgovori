@@ -1,9 +1,9 @@
 <?php
 
 $server = 'localhost';
-$user = 'zavetisce';
+$user = 'root';
 $pass = '';
-$db_name = '';
+$db_name = 'vprasanja-odgovori';
 
 $link = mysqli_connect($server, $user, $pass, $db_name);
 

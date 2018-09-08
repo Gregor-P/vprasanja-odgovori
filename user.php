@@ -4,7 +4,7 @@
     $user_id = $_SESSION['user_id'];
     
     
-        $stmt = $link->prepare("SELECT ime,priimek,email FROM uporabniki WHERE id=?;");
+        $stmt = $link->prepare("SELECT username,name,last_name,email FROM users WHERE id=?;");
         $stmt->bind_param("i", $user_id);
         $stmt->execute();
         $result = mysqli_stmt_get_result($stmt);
@@ -14,9 +14,11 @@
 <h1></h1>
 
 <form action="user_update.php" method="post">
-    <input value="<?php echo $row['ime']?>" type="text" name="ime" placeholder="Ime" required="required" />
+    <input value="<?php echo $row['username']?>" type="text" name="username" placeholder="Ime" required="required" />
     <br/>
-    <input value="<?php echo $row['priimek']?>" type="text" name="priimek" placeholder="Priimek" required="required" />
+    <input value="<?php echo $row['name']?>" type="text" name="name" placeholder="Ime" required="required" />
+    <br/>
+    <input value="<?php echo $row['last_name']?>" type="text" name="last_name" placeholder="Priimek" required="required" />
     <br/>
     <input value="<?php echo $row['email']?>" type="email" name="email" placeholder="E-pošta" required="required" />
     <br/>
