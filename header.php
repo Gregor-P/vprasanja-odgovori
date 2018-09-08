@@ -9,15 +9,12 @@
 <?php
     
     if(isset($_SESSION['user_id'])){
-
+        echo 'Pozdravljeni <a href="user.php">' . $_SESSION['username'] . '</a>';
         if($_SESSION['admin'] == 1){
-            echo 'Pozdravljeni <a href="user.php">' . $_SESSION['username'] . '<i>(admin)</i></a>';
-            echo '<a href="index.php">Domov</a>';
-        }else{
-            echo 'Pozdravljeni <a href="user.php">' . $_SESSION['username'] . '</a>';
-            echo '<a href="index.php">Domov</a>';
+            echo '<i>(admin)</i>';
         }
-        echo '<a href="logout.php">Izpis </a>';
+        echo '<a href="index.php" class="header-btn">Domov</a>';
+        echo '<a href="logout.php" class="header-btn">Izpis </a>';
     }
     else{
         echo '<a href="registration.php"> Registracija </a>';

@@ -1,0 +1,29 @@
+body{
+    background-color: gainsboro;
+    font-family: arial;
+    font-size: 11pt;
+}
+
+a{
+    color: orangered;
+    text-decoration: none;
+}
+
+nav#header{
+    background-color: #1f1f1f;
+    color: lightgrey;
+    margin: -6px;
+    height: 20px;
+    padding: 10px;
+}
+
+.header-btn{
+    display: inline-block;
+    height: 20px;
+    padding: 10px 20px 10px 20px;
+    margin-top: -10px;
+}
+
+.header-btn:hover{
+    background-color: #2f2f2f;
+}
