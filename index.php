@@ -1,7 +1,6 @@
 <?php
 //header
 include_once './header.php';
-<<<<<<< HEAD
 
 
 if(!isset($GET['izbrano'])){
@@ -23,14 +22,11 @@ get questions of selected category and list them
 	echo '<a href="index.php?izbrano='.$row['id'].'" class="topic">'.$row['name'].'</a>';		
     }
     echo '</nav>';
-=======
 ?>
-<h1>Pozdravljeni</h1>
 
-<a href="add_question.php"> VPRASAJ NEKAJ </a>;
+<a href="add_question.php"> VPRASAJ NEKAJ </a>
 
 <?php
->>>>>>> 34accd439fe91e46d725a9328c10e59e996b6731
 //footer
 include_once './footer.php';
 ?>

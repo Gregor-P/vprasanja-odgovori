@@ -1,10 +1,5 @@
 <?php
-<<<<<<< HEAD
-$salt = 'dglkn349346$%dfh';
-
-=======
 $salt = "jdf0s#!#)=#4324";
->>>>>>> 34accd439fe91e46d725a9328c10e59e996b6731
 $host = 'localhost';
 $db   = 'vprasanja-odgovori';
 $user = 'root';
