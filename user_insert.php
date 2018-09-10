@@ -10,7 +10,11 @@ $pass1 = $_POST['pass1'];
 $pass2 = $_POST['pass2'];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 //preverim. če je uporabnik pravilno izpolnil obrazec
+=======
+//preverimo če je uporabnik pravilno izpolnil obrazec
+>>>>>>> 34accd439fe91e46d725a9328c10e59e996b6731
 =======
 //preverimo če je uporabnik pravilno izpolnil obrazec
 >>>>>>> 34accd439fe91e46d725a9328c10e59e996b6731

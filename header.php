@@ -11,6 +11,7 @@
     if(isset($_SESSION['user_id'])){
         echo 'Pozdravljeni <a href="user.php">' . $_SESSION['username'] . '</a>';
 <<<<<<< HEAD
+<<<<<<< HEAD
         if($_SESSION['admin'] == 1){
             echo '<i>(admin)</i>';
         }
@@ -20,6 +21,11 @@
         if(1){ //DODAJ ADMIN BOOL U BAZO AAA
             echo '<i>(admin)</i>';
         }
+=======
+        if(1){ //DODAJ ADMIN BOOL U BAZO AAA
+            echo '<i>(admin)</i>';
+        }
+>>>>>>> 34accd439fe91e46d725a9328c10e59e996b6731
             echo '<a href="index.php">Domov</a>';
         echo '<a href="logout.php">Izpis </a>';
 >>>>>>> 34accd439fe91e46d725a9328c10e59e996b6731
