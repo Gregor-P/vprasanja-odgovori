@@ -1,16 +1,20 @@
 <?php
-
-$server = 'localhost';
-$user = 'zavetisce';
+$salt = "jdf0s#!#)=#4324";
+$host = 'localhost';
+$db   = 'vprasanja-odgovori';
+$user = 'root';
 $pass = '';
-$db_name = '';
+$charset = 'utf8mb4';
 
-$link = mysqli_connect($server, $user, $pass, $db_name);
-
-if (!$link) {
-    die("Connection failed: " . mysqli_connect_error());
+$dsn = "mysql:host=$host;dbname=$db;charset=$charset";
+$opt = [
+    PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+    PDO::ATTR_EMULATE_PREPARES   => false,
+];
+try {
+     $pdo = new PDO($dsn, $user, $pass, $opt);
+} catch (\PDOException $e) {
+     throw new \PDOException($e->getMessage(), (int)$e->getCode());
 }
-
-mysqli_query($link, "SET NAMES 'utf8'");
-$salt = 'dglkn349346$%dfh';
 ?>

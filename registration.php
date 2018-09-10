@@ -5,9 +5,11 @@
 <h1>Registracija</h1>
 
 <form action="user_insert.php" method="post">
-    <input type="text" name="ime" placeholder="Ime" required="required" />
+    <input type="text" name="username" placeholder="Uporabniško Ime" required="required" />
     <br/>
-    <input type="text" name="priimek" placeholder="Priimek" required="required" />
+    <input type="text" name="name" placeholder="Ime" />
+    <br/>
+    <input type="text" name="last_name" placeholder="Priimek" />
     <br/>
     <input type="email" name="email" placeholder="E-pošta" required="required" />
     <br/>
