@@ -9,14 +9,11 @@
 <?php
     
     if(isset($_SESSION['user_id'])){
-
-        if($_SESSION['admin'] == 1){
-            echo 'Pozdravljeni <a href="user.php">' . $_SESSION['ime'] . '<i>(admin)</i></a>';
-            echo '<a href="index.php">Domov</a>';
-        }else{
-            echo 'Pozdravljeni <a href="user.php">' . $_SESSION['ime'] . '</a>';
-            echo '<a href="index.php">Domov</a>';
+        echo 'Pozdravljeni <a href="user.php">' . $_SESSION['username'] . '</a>';
+        if(1){ //DODAJ ADMIN BOOL U BAZO AAA
+            echo '<i>(admin)</i>';
         }
+            echo '<a href="index.php">Domov</a>';
         echo '<a href="logout.php">Izpis </a>';
     }
     else{

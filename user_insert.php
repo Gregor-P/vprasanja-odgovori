@@ -25,15 +25,15 @@ if (!empty($username) && !empty($email)
         $stmt->execute([$username,$pass,$email,$name,$last_name]);
     }
     else{
-        //header("Location: registration.php?error=1");
+        header("Location: registration.php?error=1");
     }
     
 }
 else {
     //preusmeritev nazaj
-    //header("Location: registration.php");
+    header("Location: registration.php");
 }
 
-//header("Location: login.php");
+header("Location: login.php");
 
 ?>

@@ -3,9 +3,9 @@
 include_once './header.php';
 ?>
 <h1>Pozdravljeni</h1>
-<h2>na glavni strani zavetisca za zivali</h2>
 
-asdasdasdasd
+<a href="add_question.php"> VPRASAJ NEKAJ </a>;
+
 <?php
 //footer
 include_once './footer.php';
