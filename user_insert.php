@@ -9,20 +9,24 @@ $email = $_POST['email'];
 $pass1 = $_POST['pass1'];
 $pass2 = $_POST['pass2'];
 
+<<<<<<< HEAD
 //preverim. če je uporabnik pravilno izpolnil obrazec
+=======
+//preverimo če je uporabnik pravilno izpolnil obrazec
+>>>>>>> 34accd439fe91e46d725a9328c10e59e996b6731
 if (!empty($username) && !empty($email)
         && !empty($pass1) && ($pass1==$pass2)) {
     //vse ok
     $pass = $salt.$pass1;
     $pass = sha1($pass);
     
-    $query1 = "SELECT * FROM users WHERE (email='$email')";
-    $result = mysqli_query($link, $query1);
-    if(mysqli_num_rows($result) <= 0){
-        $stmt = $link->prepare("INSERT INTO users (username,name,last_name,email,pass) "
-                             . "VALUES (?,?,?,?,?);");
-        $stmt->bind_param("sssss", $username, $name, $last_name, $email, $pass);
-        $stmt->execute();
+    $stmt = $pdo->prepare("SELECT * FROM users WHERE email=?");
+    $stmt->execute([$email]);
+    $row = $stmt->fetch();
+    if(!$row){
+        $stmt = $pdo->prepare("INSERT INTO users (username,pass,email,name,last_name) "
+                            . "VALUES (?,?,?,?,?)");
+        $stmt->execute([$username,$pass,$email,$name,$last_name]);
     }
     else{
         header("Location: registration.php?error=1");

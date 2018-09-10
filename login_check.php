@@ -8,21 +8,26 @@
     if (!empty($email) && !empty($pass)) {
         //pripravimo geslo
         $pass = sha1($salt.$pass);
-        $query = "SELECT * FROM users WHERE email='$email' AND pass='$pass'";
-        $result = mysqli_query($link, $query);
-        if (mysqli_num_rows($result) != 1) {
+        $stmt = $pdo->prepare("SELECT * FROM users WHERE email=? AND pass=?");
+        $stmt->execute([$email,$pass]);
+        $row = $stmt->fetch();
+        if(!$row){
             //preusmeritev na login
-            header("Location: login.php");
+            //header("Location: login.php");
+            echo 'retard';
         }
         else {
             //vse je ok - naredi prijavo
             //rezultat select stavka - shrani v array
-            $user = mysqli_fetch_array($result);
-            $_SESSION['user_id'] = $user['id'];
-            $_SESSION['username'] = $user['username'];
-            $_SESSION['name'] = $user['name'];
-			$_SESSION['last_name'] = $user['last_name'];
-            $_SESSION['admin'] = $user['admin'];
+            
+            $_SESSION['user_id'] = $row['id'];
+            $_SESSION['username'] = $row['username'];
+            $_SESSION['email'] = $row['email'];
+<<<<<<< HEAD
+            $_SESSION['admin'] = $row['admin'];
+=======
+            //$_SESSION['admin'] = $row['admin']; !!!!!!!!!!!!!!!!!!
+>>>>>>> 34accd439fe91e46d725a9328c10e59e996b6731
             //preusmeritev na login
             header("Location: index.php");
         }

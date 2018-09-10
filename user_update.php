@@ -3,8 +3,9 @@
 include_once './session.php';
 include_once './database.php';
 
-$ime = $_POST['ime'];
-$priimek = $_POST['priimek'];
+$username = $_POST['username'];
+$name = $_POST['name'];
+$last_name = $_POST['last_name'];
 $email = $_POST['email'];
 $pass1 = $_POST['pass1'];
 $pass2 = $_POST['pass2'];
@@ -16,9 +17,8 @@ if (!empty($ime) && !empty($priimek) && !empty($email)
     $pass = $salt.$pass1;
     $pass = sha1($pass);
 
-    $stmt = $link->prepare("UPDATE uporabniki SET ime=?, priimek=?, email=?, geslo=? WHERE id=?");
-    $stmt->bind_param("ssssi", $ime, $priimek, $email, $pass, $user_id);
-    $stmt->execute();
+    $stmt = $pdo->prepare("UPDATE users SET username=?,pass=?,email=?,name=?,last_name=? WHERE id=?");
+    $stmt->execute([$username,$pass,$email,$name,$last_name,$user_id]);
 
 }
 
