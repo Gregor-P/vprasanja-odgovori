@@ -6,19 +6,11 @@
 
 <form action="user_insert.php" method="post">
 <<<<<<< HEAD
-<<<<<<< HEAD
     <input type="text" name="username" placeholder="Uporabniško ime" required="required" /> *
     <br/>
     <input type="text" name="name" placeholder="Ime"/>
 =======
     <input type="text" name="username" placeholder="Uporabniško Ime" required="required" />
-=======
-    <input type="text" name="username" placeholder="Uporabniško Ime" required="required" />
-    <br/>
-    <input type="text" name="name" placeholder="Ime" />
-    <br/>
-    <input type="text" name="last_name" placeholder="Priimek" />
->>>>>>> 34accd439fe91e46d725a9328c10e59e996b6731
     <br/>
     <input type="text" name="name" placeholder="Ime" />
     <br/>

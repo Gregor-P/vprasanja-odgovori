@@ -24,11 +24,7 @@
             $_SESSION['username'] = $row['username'];
             $_SESSION['email'] = $row['email'];
 <<<<<<< HEAD
-<<<<<<< HEAD
             $_SESSION['admin'] = $row['admin'];
-=======
-            //$_SESSION['admin'] = $row['admin']; !!!!!!!!!!!!!!!!!!
->>>>>>> 34accd439fe91e46d725a9328c10e59e996b6731
 =======
             //$_SESSION['admin'] = $row['admin']; !!!!!!!!!!!!!!!!!!
 >>>>>>> 34accd439fe91e46d725a9328c10e59e996b6731
