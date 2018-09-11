@@ -9,11 +9,7 @@ $email = $_POST['email'];
 $pass1 = $_POST['pass1'];
 $pass2 = $_POST['pass2'];
 
-<<<<<<< HEAD
-//preverim. če je uporabnik pravilno izpolnil obrazec
-=======
-//preverimo če je uporabnik pravilno izpolnil obrazec
->>>>>>> 34accd439fe91e46d725a9328c10e59e996b6731
+
 if (!empty($username) && !empty($email)
         && !empty($pass1) && ($pass1==$pass2)) {
     //vse ok

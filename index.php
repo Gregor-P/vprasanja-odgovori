@@ -1,3 +1,4 @@
+
 <?php
 //header
 include_once './header.php';
@@ -22,11 +23,13 @@ get questions of selected category and list them
 	echo '<a href="index.php?izbrano='.$row['id'].'" class="topic">'.$row['name'].'</a>';		
     }
     echo '</nav>';
-?>
 
-<a href="add_question.php"> VPRASAJ NEKAJ </a>
+if(isset($_SESSION['user_id'])){
+    echo '<a href="add_question.php"> VPRASAJ NEKAJ </a>';
+}else{
+    echo '<p>Prijavi se če hočeš kaj vprašati</p>';
+}
 
-<?php
 //footer
 include_once './footer.php';
 ?>

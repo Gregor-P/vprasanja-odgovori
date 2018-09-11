@@ -6,6 +6,7 @@
 <html>
     <nav id="header">
         <link rel="stylesheet" type="text/css" href="./style.css" /> 
+        <meta charset="UTF-8"/>
 <?php
     
     if(isset($_SESSION['user_id'])){
@@ -19,6 +20,7 @@
 
     }
     else{
+        echo '<a href="index.php" class="header-btn">Domov</a>';
         echo '<a href="registration.php" class="header-btn"> Registracija </a>';
         echo '<a href="login.php" class="header-btn"> Prijava </a>';
     }

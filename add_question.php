@@ -10,15 +10,14 @@
     <br/>
     <select name="topic_id">
         <?php
-        $data = $pdo->query("SELECT * FROM topics")->fetchAll();
-        
-        while($row){
-            echo $row['id'];
+        $stmt = $pdo->prepare("SELECT * FROM topics");
+        $stmt->execute();
+        while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+            echo '<option value="'.$row['id'].'">'.$row['name'].'</option>';
         }
         
         ?>
-        <option value="1">tema #1</option>
-        <option value="2">tema #2</option>
+
     </select>
     <br/>
     <input type="submit" value="vprasaj"/>
