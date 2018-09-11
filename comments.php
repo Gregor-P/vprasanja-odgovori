@@ -16,8 +16,18 @@ if(isset($_SESSION['user_id'])){
     <?php
 }
 
-$stmt = $pdo->prepare("SELECT * FROM answers WHERE question_id =?");
+$stmt = $pdo->prepare("SELECT *,a.id AS answer_id FROM answers a "
+        . "INNER JOIN users u ON u.id = a.user_id "
+        . "WHERE question_id =?");
 $stmt->execute([$id]);
+
 while($comment = $stmt->fetch(PDO::FETCH_ASSOC)){
-    echo $comment['answer'] ."<br/>";
+    echo '<div class="comment">';
+    echo $comment['username'] .'<br/>';
+    echo $comment['answer'] .'<br/>';
+    if($comment['user_id']==$_SESSION['user_id'] || $_SESSION['admin'] == 1){
+        echo '<a href="delete_comment.php?id='. $comment['answer_id'] .'">izbriši</a>';
+        echo '<br/><br/>';
+    }
+    echo '</div>';
 }
