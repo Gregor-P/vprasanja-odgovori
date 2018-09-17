@@ -4,32 +4,34 @@
 include_once './header.php';
 
 
-if(!isset($GET['izbrano'])){
-	$GET['izbrano'] = 0;
+if(!isset($_GET['izbrano'])){
+	$_GET['izbrano'] = 0;
 }
-/*
-get all categories and list them here
-big "submit question" button
-get questions of selected category and list them 
-(chronological or by alphabet)
-*/
-    echo '<nav id="topics-bar">';
-    echo '<a href="index.php?izbrano=0" class="topic">vse</a>';
-    
-    $stmt = $pdo->prepare("SELECT * FROM topics;");
-    $stmt->execute();
-    
-    while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
-	echo '<a href="index.php?izbrano='.$row['id'].'" class="topic">'.$row['name'].'</a>';		
-    }
-    echo '</nav>';
-echo '<div class="center">';
+
 if(isset($_SESSION['user_id'])){
-    echo '<a href="add_question.php"> VPRASAJ NEKAJ </a>';
+    echo '<a href="add_question.php" id="ask-question"> VPRASAJ NEKAJ </a>';
 }else{
     echo '<p>Prijavi se če hočeš kaj vprašati</p>';
 }
-echo '</div>';
+    if($_GET['izbrano'] == 0 || !isset($_GET['izbrano'])){
+        $stmt = $pdo->prepare("SELECT * FROM questions;");
+        $stmt->execute();
+        
+    }else{
+        $stmt = $pdo->prepare("SELECT * FROM questions WHERE topic_id=?;");
+        $stmt->execute([$_GET['izbrano']]);
+    }
+
+    
+    while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+        echo '<br/><div class="question-block">';
+	echo '<a href="display_question.php?id='.$row['id'].'" class="question-title">'.$row['question'].'</a>';		
+        echo '<br/>';
+        echo '<p>'.$row['content'].'</p>';
+        echo '</div>';
+    }
+
+
 //footer
 include_once './footer.php';
 ?>

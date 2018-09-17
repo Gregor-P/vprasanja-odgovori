@@ -13,8 +13,7 @@
         $row = $stmt->fetch();
         if(!$row){
             //preusmeritev na login
-            //header("Location: login.php");
-            echo 'retard';
+            header("Location: login.php");
         }
         else {
             //vse je ok - naredi prijavo

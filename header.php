@@ -24,7 +24,12 @@
         echo '<a href="registration.php" class="header-btn"> Registracija </a>';
         echo '<a href="login.php" class="header-btn"> Prijava </a>';
     }
-
+    if($_SERVER['REQUEST_URI'] == "/vprasanja-odgovori/index.php"){
+    include_once './topic_bar.php';
+    }
 ?>
+    </nav>
+
+    <nav class="center">
     </nav>
 </html>
