@@ -19,10 +19,10 @@
             //vse je ok - naredi prijavo
             //rezultat select stavka - shrani v array
             
-            $_SESSION['user_id'] = $row['id'];
-            $_SESSION['username'] = $row['username'];
-            $_SESSION['email'] = $row['email'];
-            $_SESSION['admin'] = $row['admin'];
+            $_SESSION['user_id' ]    =      $row['id'       ];
+            $_SESSION['username']    =      $row['username' ];
+            $_SESSION['email'   ]    =      $row['email'    ];
+            $_SESSION['admin'   ]    =      $row['admin'    ];
 
             //preusmeritev na login
             header("Location: index.php");

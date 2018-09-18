@@ -11,13 +11,14 @@ if(!isset($_GET['izbrano'])){
 if(isset($_SESSION['user_id'])){
     echo '<a href="add_question.php" id="ask-question"> VPRASAJ NEKAJ </a>';
 }else{
-    echo '<p>Prijavi se če hočeš kaj vprašati</p>';
+    echo '<p id="not-signed-in">Prijavi se če hočeš kaj vprašati</p>';
 }
     if($_GET['izbrano'] == 0 || !isset($_GET['izbrano'])){
         $stmt = $pdo->prepare("SELECT * FROM questions;");
         $stmt->execute();
         
-    }else{
+    }
+    else{
         $stmt = $pdo->prepare("SELECT * FROM questions WHERE topic_id=?;");
         $stmt->execute([$_GET['izbrano']]);
     }

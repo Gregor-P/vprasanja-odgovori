@@ -1,16 +1,13 @@
+
 <?php
 include_once './database.php';
 include_once './session.php';
 include_once './header.php';
+
 $id = $_GET['id'];
-$user_id = $_SESSION['user_id'];
-$stmt = $pdo->prepare("SELECT question_id FROM views WHERE user_id=? AND question_id=?");
-$stmt->execute([$user_id, $id]);
-$row = $stmt->fetch();
-if(!$row){
-    $stmt = $pdo->prepare("INSERT INTO views(user_id, question_id, subscribed) VALUES (?,?,?)");
-    $stmt->execute([$user_id, $id, 0]);
-}
+
+
+
 
 $stmt = $pdo->prepare("SELECT *,t.name AS topic_name FROM questions q "
         . "INNER JOIN users u ON q.user_id = u.id "
@@ -36,12 +33,28 @@ echo '<br/>';
 echo '</div>';
 
 ?>
-<script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js">
     //rating script
+
+    
 </script>
-<form action="rate.php" method="POST">
-    <input type="button" name="up" value="like"/>
+<form>
+    <input type="button" value="click" id="btn" />
 </form>
+
+
 <?php
 
-//include_once './comments.php';
+if(isset($_SESSION['user_id'])){
+    $user_id = $_SESSION['user_id'];
+
+    $stmt = $pdo->prepare("SELECT question_id FROM views WHERE user_id=? AND question_id=?");
+    $stmt->execute([$user_id, $id]);
+    $row = $stmt->fetch();
+    
+    if(!$row){
+        $stmt = $pdo->prepare("INSERT INTO views(user_id, question_id, subscribed) VALUES (?,?,?)");
+        $stmt->execute([$user_id, $id, 0]);
+    }
+    include_once './comments.php';
+}

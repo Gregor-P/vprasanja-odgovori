@@ -1,5 +1,5 @@
 body{
-    background-color: gainsboro;
+    background-color: #efefef;
     font-family: arial;
     font-size: 11pt;
     margin: 0 auto;
@@ -7,11 +7,12 @@ body{
 }
 
 .center{
-    margin: 0px auto;
-    width: 750px;
+    margin: -18px auto;
+    width: 800px;
     height: 100%;
+    padding-top: 90px;
     background-color: white;
-    box-shadow: 0px 4px 3px 3px #8f8f8f;
+    box-shadow: 0px 4px 3px 3px #9f9f9f;
     z-index: -1;
 }
 
@@ -19,7 +20,7 @@ body{
     background-color: #1f1f1f;
     width: 111%;
     margin-left: -10px;
-    position: static;
+    position: absolute;
 }
 
 .topic{
@@ -44,9 +45,9 @@ nav#header{
     background-color: #0f0f0f;
     color: lightgrey;
     width: 100%;
-    margin: -7px;
     height: 20px;
     padding: 10px;
+    position: fixed;
 }
 
 .header-btn{
@@ -82,7 +83,7 @@ form{
 input, textarea, select{
     width: 100%;
     border: 1px solid #9f9f9f;
-	border-radius: 2px;
+    border-radius: 2px;
 }
 
 .question-block{
@@ -96,11 +97,9 @@ input, textarea, select{
     
 }
 
-#ask-question{
+#ask-question, #not-signed-in{
     color: black;
     padding: 10px;
-    margin: 30px;
-    top: 100px;
     background-color: lightgreen;
     border-radius: 5px;
 }
