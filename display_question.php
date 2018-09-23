@@ -18,11 +18,18 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
 echo '<p id="post-topic">'.$row['topic_name'].'</p>';       //post-topic
 
+
 echo '<div class="question-block">';                        //question-block (div)
 
+$stmt = $pdo->prepare("SELECT count(id) FROM users_posts "
+                    . "WHERE post_id = ? "
+                    . "AND rating = 1");
+$stmt->execute([$id]);
+$vote_count = $stmt->fetch(PDO::FETCH_NUM);
 
-//number of upvotes
-echo '  <p id="question-title"> | '. $row['title'] . '</p>';  //question-title
+echo '<span class="votes-num">'. $vote_count[0] . '</span> | ';
+        
+echo '<span id="question-title">'. $row['title']. '</span>';
 
 //upvote button
 echo '<p id="content">' . $row['content'] . '</p>';         //content
@@ -35,14 +42,18 @@ echo '</p>';
 echo '</div>';
 
 ?>
+
+<form id="rating" action="rate.php" method="POST">
+    <input type="hidden" name="post_id" value="<?php echo $id; ?>"
+    <input type="button" name="1" value="1" />
+</form>    
+
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js">
     //rating script
 
     
 </script>
-<form>
-    <input type="button" value="click" id="btn" />
-</form>
+
 
 
 <?php

@@ -29,17 +29,20 @@ if(isset($_SESSION['user_id'])){
 
     
     while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
-        echo '<a href="display_question.php?id='.$row['post_id'].'">';
+        
         echo '<br/><div class="question-block">';
         
         $stmt = $pdo->prepare("SELECT count(id) FROM users_posts "
-                            . "WHERE post_id = ?");
+                            . "WHERE post_id = ? "
+                            . "AND rating = 1");
         $stmt->execute([$row['post_id']]);
         $vote_count = $stmt->fetch(PDO::FETCH_NUM);
         
-        echo '<p id="question-title"> ';
-        echo '<span class="votes-num">'. $vote_count[0] . '</span>';
-        echo ' | '. $row['title'] . '</p>';  //question-title
+
+        echo '<span class="votes-num">'. $vote_count[0] . '</span> | ';
+        
+        echo '<a id="question-title" href="display_question.php?id='.$row['post_id']
+            .'">'. $row['title']. '</a>';
 
         echo '<p id="content">' . $row['content'] . '</p>';         //content
 

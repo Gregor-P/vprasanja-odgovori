@@ -16,34 +16,9 @@ body{
     z-index: -1;
 }
 
-#topics-bar{
-    background-color: #1f1f1f;
-    width: 111%;
-    margin-left: -10px;
-    position: absolute;
-}
-
-.topic{
-    text-align: center;
-    color: #f0f0f0;
-    padding: 10px;
-    width: 60px;
-    background-color: #1f1f1f;
-    display: inline-block;
-}
-
-.topic:hover{
-    background-color: #0f0f0f;
-}
-
-a{
-    color: orangered;
-    text-decoration: none;
-}
-
 nav#header{
     margin-top: 18px;
-    background-color: #0f0f0f;
+    background-color: #161930;
     color: lightgrey;
     width: 100%;
     height: 20px;
@@ -60,6 +35,30 @@ nav#header{
 
 .header-btn:hover{
     background-color: #2f2f2f;
+}
+
+#topics-bar{
+    background-color: #111428;
+    width: 111%;
+    margin-left: -10px;
+    position: fixed;
+}
+
+.topic{
+    text-align: center;
+    color: #f0f0f0;
+    padding: 10px;
+    background-color: #111428;
+    display: inline-block;
+}
+
+.topic:hover{
+    background-color: #161930;
+}
+
+a{
+    color: orangered;
+    text-decoration: none;
 }
 
 .logout-btn{
@@ -111,6 +110,8 @@ hr{
 
 #question-title{
     font-size: 15pt;
+    margin-left: 10px;
+    text-decoration: underline;
 }
 
 #content{
