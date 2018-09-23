@@ -6,7 +6,7 @@ $user_id = $_SESSION['user_id'];
 $answer = $_POST['comment'];
 $question_id = $_POST['question_id'];
 
-$stmt = $pdo->prepare("INSERT INTO answers (answer, user_id, question_id) "
+$stmt = $pdo->prepare("INSERT INTO posts (content, user_id, parent_id) "
                     . "VALUES (?,?,?)");
         $stmt->execute([$answer,$user_id,$question_id]);
         

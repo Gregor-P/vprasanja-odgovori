@@ -6,7 +6,7 @@ $content = $_POST['content'];
 $topic_id = $_POST['topic_id'];
 $user_id = $_SESSION['user_id'];
 
-$stmt = $pdo->prepare("INSERT INTO questions (question,content,topic_id,user_id) "
+$stmt = $pdo->prepare("INSERT INTO posts (title,content,topic_id,user_id) "
                             . "VALUES (?,?,?,?)");
         $stmt->execute([$title,$content,$topic_id,$user_id]);
         

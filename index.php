@@ -14,22 +14,35 @@ if(isset($_SESSION['user_id'])){
     echo '<p id="not-signed-in">Prijavi se če hočeš kaj vprašati</p>';
 }
     if($_GET['izbrano'] == 0 || !isset($_GET['izbrano'])){
-        $stmt = $pdo->prepare("SELECT * FROM questions;");
+        $stmt = $pdo->prepare("SELECT *,p.id AS post_id FROM posts p"
+                            . " INNER JOIN users u ON u.id = p.user_id"
+                            . " WHERE topic_id IS NOT NULL");
         $stmt->execute();
         
     }
     else{
-        $stmt = $pdo->prepare("SELECT * FROM questions WHERE topic_id=?;");
+        $stmt = $pdo->prepare("SELECT *,p.id AS post_id FROM posts p"
+                            . " INNER JOIN users u ON u.id = p.user_id"
+                            . " WHERE topic_id=?");
         $stmt->execute([$_GET['izbrano']]);
     }
 
     
     while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+        echo '<a href="display_question.php?id='.$row['post_id'].'">';
         echo '<br/><div class="question-block">';
-	echo '<a href="display_question.php?id='.$row['id'].'" class="question-title">'.$row['question'].'</a>';		
-        echo '<br/>';
-        echo '<p>'.$row['content'].'</p>';
-        echo '</div>';
+        
+        //number of upvotes !!!!!!!!!!!!!!!!!!!!
+        echo '  <p id="question-title"> | '. $row['title'] . '</p>';  //question-title
+
+        echo '<p id="content">' . $row['content'] . '</p>';         //content
+
+        echo '<p id="user-time">';                                  //user-time
+        echo '<a href="">' . $row['username'] . '</a>';
+        echo ' | '.$row['timestamp'];
+        echo '</p>';
+
+        echo '</div></a>';
     }
 
 

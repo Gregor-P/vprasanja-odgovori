@@ -17,7 +17,7 @@ if (!empty($ime) && !empty($priimek) && !empty($email)
     $pass = $salt.$pass1;
     $pass = sha1($pass);
 
-    $stmt = $pdo->prepare("UPDATE users SET username=?,pass=?,email=?,name=?,last_name=? WHERE id=?");
+    $stmt = $pdo->prepare("UPDATE users SET username=?,pass=?,email=?,first_name=?,last_name=? WHERE id=?");
     $stmt->execute([$username,$pass,$email,$name,$last_name,$user_id]);
 
 }

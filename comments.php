@@ -16,18 +16,23 @@ if(isset($_SESSION['user_id'])){
     <?php
 }
 
-$stmt = $pdo->prepare("SELECT *,a.id AS answer_id FROM answers a "
+$stmt = $pdo->prepare("SELECT *,a.id AS answer_id FROM posts a "
         . "INNER JOIN users u ON u.id = a.user_id "
-        . "WHERE question_id =?");
+        . "WHERE parent_id =?");
 $stmt->execute([$id]);
 
-while($comment = $stmt->fetch(PDO::FETCH_ASSOC)){
-    echo '<div class="comment">';
-    echo $comment['username'] .'<br/>';
-    echo $comment['answer'] .'<br/>';
-    if($comment['user_id']==$_SESSION['user_id'] || $_SESSION['admin'] == 1){
-        echo '<a href="delete_comment.php?id='. $comment['answer_id'] .'">izbriši</a>';
-        echo '<br/><br/>';
-    }
-    echo '</div>';
+while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+echo '<div class="question-block" class="comment">';                        //question-block (div)
+
+//number of upvotes
+
+//upvote button
+echo '<p id="content">' . $row['content'] . '</p>';         //content
+
+echo '<p id="user-time">';                                  //user-time
+echo '<a href="">' . $row['username'] . '</a>';
+echo ' | '.$row['timestamp'];
+echo '</p>';
+
+echo '</div>';
 }

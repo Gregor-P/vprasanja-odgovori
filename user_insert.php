@@ -20,7 +20,7 @@ if (!empty($username) && !empty($email)
     $stmt->execute([$email]);
     $row = $stmt->fetch();
     if(!$row){
-        $stmt = $pdo->prepare("INSERT INTO users (username,pass,email,name,last_name) "
+        $stmt = $pdo->prepare("INSERT INTO users (username,pass,email,first_name,last_name) "
                             . "VALUES (?,?,?,?,?)");
         $stmt->execute([$username,$pass,$email,$name,$last_name]);
     }

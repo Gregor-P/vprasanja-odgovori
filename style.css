@@ -10,7 +10,7 @@ body{
     margin: -18px auto;
     width: 800px;
     height: 100%;
-    padding-top: 90px;
+    padding-top: 120px;
     background-color: white;
     box-shadow: 0px 4px 3px 3px #9f9f9f;
     z-index: -1;
@@ -42,6 +42,7 @@ a{
 }
 
 nav#header{
+    margin-top: 18px;
     background-color: #0f0f0f;
     color: lightgrey;
     width: 100%;
@@ -77,7 +78,7 @@ nav#header{
 form{
     margin: 0 auto; 
     background-color: white;
-    width: 250;
+    width: 250px;
 }
 
 input, textarea, select{
@@ -88,18 +89,37 @@ input, textarea, select{
 
 .question-block{
     margin: 25px;
-    height: 150px;
+    padding: 5px 10px 1px 10px;
     width: 90%;
     background-color: gainsboro;
 }
-
-.question-title{
-    
+.comment{
+    max-width: 80%
 }
-
 #ask-question, #not-signed-in{
     color: black;
     padding: 10px;
     background-color: lightgreen;
     border-radius: 5px;
+    margin: 0 auto;
+}
+
+
+#question-title{
+    font-size: 15pt;
+}
+
+#content{
+    margin-left: 25px;
+}
+
+#user-time{
+    font-style: italic;
+    opacity: 0.75;
+}
+
+#user-time a:hover{
+    opacity: 1.0;
+    color: red;
+    text-decoration: underline;
 }
