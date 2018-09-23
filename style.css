@@ -8,7 +8,7 @@ body{
 
 .center{
     margin: -18px auto;
-    width: 800px;
+    width: 900px;
     height: 100%;
     padding-top: 120px;
     background-color: white;
@@ -96,6 +96,10 @@ input, textarea, select{
 .comment{
     max-width: 80%
 }
+
+hr{
+    margin-bottom: -12px;
+}
 #ask-question, #not-signed-in{
     color: black;
     padding: 10px;
@@ -115,7 +119,7 @@ input, textarea, select{
 
 #user-time{
     font-style: italic;
-    opacity: 0.75;
+    opacity: 0.6;
 }
 
 #user-time a:hover{

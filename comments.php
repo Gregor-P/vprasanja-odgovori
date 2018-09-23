@@ -22,17 +22,29 @@ $stmt = $pdo->prepare("SELECT *,a.id AS answer_id FROM posts a "
 $stmt->execute([$id]);
 
 while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
-echo '<div class="question-block" class="comment">';                        //question-block (div)
+    echo '<div class="question-block" class="comment">';       //question-block (div)
 
-//number of upvotes
+    //number of upvotes
 
-//upvote button
-echo '<p id="content">' . $row['content'] . '</p>';         //content
+    //upvote button
+    echo '<p id="content">' . $row['content'] . '</p>';         //content
+    echo '<hr/>';
+    echo '<p id="user-time">';                                  //user-time
+    echo '<a href="">' . $row['username'] . '</a>';
+    echo ' | '.$row['timestamp'];
 
-echo '<p id="user-time">';                                  //user-time
-echo '<a href="">' . $row['username'] . '</a>';
-echo ' | '.$row['timestamp'];
-echo '</p>';
+    if($row['user_id']==$_SESSION['user_id'] || $_SESSION['admin'] == 1){
+        echo '<a style="float: right;" href="delete_comment.php?id='. $row['answer_id'] .'">izbriši</a>';
+        echo '<br/>';
+    }
+       echo '</p>';
 
-echo '</div>';
+    if(isset($_SESSION['user_id'])){
+        ?>
+<form>
+    
+</form>    
+        <?php
+    }
+    echo '</div>';
 }
