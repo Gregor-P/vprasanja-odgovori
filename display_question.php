@@ -3,11 +3,9 @@
 include_once './database.php';
 include_once './session.php';
 include_once './header.php';
+include_once './comments.php';
 
 $id = $_GET['id'];
-
-
-
 
 $stmt = $pdo->prepare("SELECT *,t.name AS topic_name FROM posts q "
         . "INNER JOIN users u ON q.user_id = u.id "
@@ -44,17 +42,9 @@ echo '</div>';
 ?>
 
 <form id="rating" action="rate.php" method="POST">
-    <input type="hidden" name="post_id" value="<?php echo $id; ?>"
-    <input type="button" name="1" value="1" />
+    <input type="hidden" name="post_id" value="<?php echo $id; ?>" />
+    <input type="submit" name="1" value="1" />
 </form>    
-
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js">
-    //rating script
-
-    
-</script>
-
-
 
 <?php
 
@@ -69,5 +59,8 @@ if(isset($_SESSION['user_id'])){
         $stmt = $pdo->prepare("INSERT INTO users_posts(user_id, post_id, subscribed) VALUES (?,?,?)");
         $stmt->execute([$user_id, $id, 0]);
     }
-    include_once './comments.php';
+    commentForm($id);
+    
+    displayComments($pdo, $id);
+
 }

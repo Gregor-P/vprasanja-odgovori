@@ -1,32 +1,30 @@
 <?php
-include_once './database.php';
+
 include_once './session.php';
 
-if(isset($_SESSION['user_id'])){
-    ?>
 
-    <form action="insert_comment.php" method="POST">
-        <input type="hidden" name="question_id" value="<?php echo $id;?>"/>
-        
-        <textarea id="comment-field" name="comment" rows="8" cols="50" style="resize:none;"></textarea>
-        <br/>
-        <input type="submit" value="Komentiraj"/>
-    </form>
+function commentForm($answer_id){                 //prikaže form za pisanje komentarja
+    if(isset($_SESSION['user_id'])){
+        echo '
 
-    <?php
+        <form action="insert_comment.php" method="POST">
+            <input type="hidden" name="parent_id" value="'. $answer_id .'"/>
+
+            <textarea id="comment-field" name="comment" rows="3" cols="50" style="resize:none;"></textarea>
+            <br/>
+            <input type="submit" value="Odgovori"/>
+        </form>';
+    }
 }
 
-$stmt = $pdo->prepare("SELECT *,a.id AS answer_id FROM posts a "
-        . "INNER JOIN users u ON u.id = a.user_id "
-        . "WHERE parent_id =?");
-$stmt->execute([$id]);
-
-while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
-    echo '<div class="question-block" class="comment">';       //question-block (div)
-
-    //number of upvotes
-
-    //upvote button
+function commentBlock($row, $isReply = 0){
+    if($isReply == 1){
+        echo '<div class="question-block" class="comment">';
+    }
+    else{
+        echo '<div class="question-block">';       //question-block (div)
+    }
+    //upvote button goes here 
     echo '<p id="content">' . $row['content'] . '</p>';         //content
     echo '<hr/>';
     echo '<p id="user-time">';                                  //user-time
@@ -38,13 +36,28 @@ while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
         echo '<br/>';
     }
        echo '</p>';
-
-    if(isset($_SESSION['user_id'])){
-        ?>
-<form>
-    
-</form>    
-        <?php
-    }
     echo '</div>';
 }
+
+
+function displayComments(PDO $pdo, $post_id){
+    $stmt = $pdo->prepare("SELECT *,a.id AS answer_id FROM posts a "
+                        . "INNER JOIN users u ON u.id = a.user_id "
+                        . "WHERE parent_id =?");
+    $stmt->execute([$post_id]);
+
+    while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+        commentBlock($row);
+        
+        $stmt = $pdo->prepare("SELECT *,a.id AS answer_id FROM posts a "
+                            . "INNER JOIN users u ON u.id = a.user_id "
+                            . "WHERE parent_id =?");
+        $stmt->execute([$row['answer_id']]);
+        while($replies = $stmt->fetch(PDO::FETCH_ASSOC)){
+            commentBlock($replies, 1);
+        }
+        commentForm($row['answer_id']);
+    }
+}
+
+
