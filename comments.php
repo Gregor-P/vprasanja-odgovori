@@ -19,11 +19,11 @@ function commentForm($answer_id){                 //prikaže form za pisanje kom
 
 function commentBlock($row, $isReply = 0){
     if($isReply == 1){
-        echo '<div class="question-block" class="comment">';
+        echo '<span class="comment">';
     }
-    else{
-        echo '<div class="question-block">';       //question-block (div)
-    }
+    
+    echo '<div class="question-block">';       //question-block (div)
+    
     //upvote button goes here 
     echo '<p id="content">' . $row['content'] . '</p>';         //content
     echo '<hr/>';
@@ -37,6 +37,9 @@ function commentBlock($row, $isReply = 0){
     }
        echo '</p>';
     echo '</div>';
+    if($isReply == 1){
+        echo '</span>';
+    }
 }
 
 
@@ -49,11 +52,11 @@ function displayComments(PDO $pdo, $post_id){
     while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
         commentBlock($row);
         
-        $stmt = $pdo->prepare("SELECT *,a.id AS answer_id FROM posts a "
+        $stmtNew = $pdo->prepare("SELECT *,a.id AS answer_id FROM posts a "
                             . "INNER JOIN users u ON u.id = a.user_id "
                             . "WHERE parent_id =?");
-        $stmt->execute([$row['answer_id']]);
-        while($replies = $stmt->fetch(PDO::FETCH_ASSOC)){
+        $stmtNew->execute([$row['answer_id']]);
+        while($replies = $stmtNew->fetch(PDO::FETCH_ASSOC)){
             commentBlock($replies, 1);
         }
         commentForm($row['answer_id']);

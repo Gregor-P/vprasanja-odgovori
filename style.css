@@ -92,8 +92,10 @@ input, textarea, select{
     width: 90%;
     background-color: gainsboro;
 }
-.comment{
-    padding: 20px;
+
+.comment div{
+    float: right;
+    width: 80%;
 }
 
 hr{
