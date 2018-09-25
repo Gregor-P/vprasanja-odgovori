@@ -16,7 +16,7 @@ if(isset($_SESSION['user_id'])){
     if($_GET['izbrano'] == 0 || !isset($_GET['izbrano'])){
         $stmt = $pdo->prepare("SELECT *,p.id AS post_id FROM posts p"
                             . " INNER JOIN users u ON u.id = p.user_id"
-                            . " WHERE topic_id IS NOT NULL"
+                            . " WHERE topic_id IS NOT NULL AND parent_id IS NULL"
                             . " ORDER BY p.timestamp DESC");
         $stmt->execute();
     }

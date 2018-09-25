@@ -69,23 +69,26 @@ function commentBlock(PDO $pdo, $row, $isReply = 0, $onIndex = 0){
 
 
 function displayComments(PDO $pdo, $post_id){
-    $stmt = $pdo->prepare("SELECT *,a.id AS post_id FROM posts a "
+    $stmt = $pdo->prepare("SELECT *, a.id AS post_id FROM posts a "
                         . "INNER JOIN users u ON u.id = a.user_id "
-                        . "WHERE parent_id =?");
+                        . "INNER JOIN users_posts p ON p.post_id = a.id "
+                        . "WHERE parent_id =? "
+                        . "ORDER BY count(p.id) DESC");
     $stmt->execute([$post_id]);
 
     while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
-        commentBlock($pdo, $row);
-        
-        $stmtNew = $pdo->prepare("SELECT *,a.id AS post_id FROM posts a "
-                            . "INNER JOIN users u ON u.id = a.user_id "
-                            . "WHERE parent_id =?");
-        $stmtNew->execute([$row['post_id']]);
-        while($replies = $stmtNew->fetch(PDO::FETCH_ASSOC)){
-            commentBlock($pdo, $replies, 1);
+        if(isset($row['content'])){ //grd bug fix, izpisovalo je prazn form zaradi inner joina z users_posts
+            commentBlock($pdo, $row);
+            $stmtNew = $pdo->prepare("SELECT *,a.id AS post_id FROM posts a "
+                                . "INNER JOIN users u ON u.id = a.user_id "
+                                . "WHERE parent_id =?");
+            $stmtNew->execute([$row['post_id']]);
+            while($replies = $stmtNew->fetch(PDO::FETCH_ASSOC)){
+                commentBlock($pdo, $replies, 1);
+            }
+            commentForm($row['post_id']);
         }
-        commentForm($row['post_id']);
-    }
+   }
 }
 
 

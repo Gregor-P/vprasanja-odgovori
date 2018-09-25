@@ -50,6 +50,7 @@ if ($gClient->getAccessToken()) {
         $_SESSION['google'] = $rowID['oauth_provider'];
         $_SESSION['first_name'] = $rowID['first_name'];
         $_SESSION['last_name'] = $rowID['last_name'];
+        $_SESSION['admin'] = 0;
         
     }else{
         $output = '<h3 style="color:red">Some problem occurred, please try again.</h3>';
