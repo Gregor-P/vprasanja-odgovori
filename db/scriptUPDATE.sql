@@ -1,6 +1,6 @@
 /*
 Created		22/09/2018
-Modified		22/09/2018
+Modified		24/09/2018
 Project		
 Model		
 Company		
@@ -18,6 +18,8 @@ Create table users (
 	last_name Varchar(255),
 	pass Varchar(40) NOT NULL,
 	admin Tinyint NOT NULL,
+	oauth_provider Varchar(255),
+	oauth_uid Varchar(255),
  Primary Key (id)) ENGINE = MyISAM;
 
 Create table posts (

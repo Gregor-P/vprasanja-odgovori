@@ -4,7 +4,7 @@
 ?>
 
 <html>
-
+    <body>
 
     <nav id="header">
         <link rel="stylesheet" type="text/css" href="./style.css" /> 
@@ -19,7 +19,8 @@
         }
         echo '<a href="index.php" class="header-btn">Domov</a>';
         echo '<a href="logout.php" class="logout-btn">Izpis </a>';
-
+        
+        
     }
     else{
         echo '<a href="index.php" class="header-btn">Domov</a>';
@@ -32,7 +33,10 @@
    
 ?>
     </nav>
-
+    <?php 
+    if(isset($_SESSION['user_id'])){
+        include_once './side_bar.php';
+    }
+    ?>
     <nav class="center">
     
-</html>

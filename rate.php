@@ -23,4 +23,4 @@ if($row){
     }
 }
 
-header("Location: display_question.php?id=". $post_id);
+header("Location: ". $_SERVER['HTTP_REFERER']);

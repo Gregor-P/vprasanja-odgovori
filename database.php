@@ -1,5 +1,6 @@
 <?php
 $salt = "jdf0s#!#)=#4324";
+
 $host = 'localhost';
 $db   = 'vprasanja-odgovori';
 $user = 'root';

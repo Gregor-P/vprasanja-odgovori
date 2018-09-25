@@ -7,50 +7,32 @@ include_once './comments.php';
 
 $id = $_GET['id'];
 
-$stmt = $pdo->prepare("SELECT *,t.name AS topic_name FROM posts q "
-        . "INNER JOIN users u ON q.user_id = u.id "
-        . "INNER JOIN topics t ON q.topic_id = t.id "
-        . "WHERE q.id=?");
+$stmt = $pdo->prepare("SELECT *,t.name AS topic_name,q.id AS post_id "
+                    . "FROM posts q "
+                    . "INNER JOIN users u ON q.user_id = u.id "
+                    . "INNER JOIN topics t ON q.topic_id = t.id "
+                    . "WHERE q.id=?");
 $stmt->execute([$id]);
 $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
-echo '<p id="post-topic">'.$row['topic_name'].'</p>';       //post-topic
+if(!$row){ //če post ne obstaja te vrne na index oz. če query ni uspel
+    header("Location: index.php");
+}
+
+echo '<a id="post-topic" href="index.php?izbrano='.$row['topic_id'].'"> << Nazaj na '.$row['topic_name'].'</a>'; 
+echo '<br/><br/>';
+echo '<a id="sub" href="subscribe.php?post_id='.$id.'"> ⭐Sledi temu vprašanju </a>'; 
+
+commentBlock($pdo, $row);
 
 
-echo '<div class="question-block">';                        //question-block (div)
-
-$stmt = $pdo->prepare("SELECT count(id) FROM users_posts "
-                    . "WHERE post_id = ? "
-                    . "AND rating = 1");
-$stmt->execute([$id]);
-$vote_count = $stmt->fetch(PDO::FETCH_NUM);
-
-echo '<span class="votes-num">'. $vote_count[0] . '</span> | ';
-        
-echo '<span id="question-title">'. $row['title']. '</span>';
-
-//upvote button
-echo '<p id="content">' . $row['content'] . '</p>';         //content
-
-echo '<p id="user-time">';                                  //user-time
-echo '<a href="">' . $row['username'] . '</a>';
-echo ' | '.$row['timestamp'];
-echo '</p>';
-
-echo '</div>';
-
-?>
-
-<form id="rating" action="rate.php" method="POST">
-    <input type="hidden" name="post_id" value="<?php echo $id; ?>" />
-    <input type="submit" name="1" value="1" />
-</form>    
-
-<?php
 
 if(isset($_SESSION['user_id'])){
     $user_id = $_SESSION['user_id'];
 
+    //če še ne obstaja ustvari row v tabeli users_posts, kjer se lahko
+    //zapiše če je user všečkal objavo in ali je subscrajban 
+    
     $stmt = $pdo->prepare("SELECT post_id FROM users_posts WHERE user_id=? AND post_id=?");
     $stmt->execute([$user_id, $id]);
     $row = $stmt->fetch();

@@ -1,23 +1,33 @@
 body{
     background-color: #efefef;
-    font-family: arial;
-    font-size: 11pt;
+    font-family: Helvetica;
+    font-size: 12pt;
     margin: 0 auto;
-    
 }
 
 .center{
     margin: -18px auto;
-    width: 900px;
-    height: 100%;
-    padding-top: 120px;
-    background-color: white;
-    box-shadow: 0px 4px 3px 3px #9f9f9f;
+    width: 60%;
+    min-width: 540px;
+    min-height: 1080px;
+    padding-top: 110px;
+    background-color: gainsboro;
     z-index: -1;
+    float: left;
+    position: absolute;
+}
+
+#side-bar{
+    float: right;
+    padding-top: 110px;
+    min-height: 1080px;
+    width: 30%;
+    background-color: gainsboro;
+    color: black;
 }
 
 nav#header{
-    margin-top: 18px;
+    margin-top: 0;
     background-color: #161930;
     color: lightgrey;
     width: 100%;
@@ -75,45 +85,67 @@ a{
 }
 
 form{
-    margin: 0 auto; 
-    background-color: white;
-    width: 250px;
+    margin-top: -20px;
+    margin-left: 20px;
+    background-color: transparent;
+    float: left;
+    width: 500px;
+    clear: both;
 }
 
-input, textarea, select{
-    width: 100%;
+textarea{
+    font-family: Arial;
+    width: 500px;
+    height: 100px;
     border: 1px solid #9f9f9f;
     border-radius: 2px;
 }
 
+textarea, input, select{
+    font-size: 12pt;
+    margin: 2px;
+    padding: 10px;
+    border-radius: 2px;
+    box-shadow: none;
+    border: 1px solid gray;
+    width: 100%;
+}
+
 .question-block{
+    clear: both;
     margin: 25px;
-    padding: 5px 10px 1px 10px;
-    width: 90%;
-    background-color: gainsboro;
+    padding: 15px 15px 5px 15px;
+    width: 80%;
+    min-width: 470px;
+    max-width: 750px;
+    background-color: white;
+    box-shadow: 0px 0px 10px  #9f9f9f;
 }
 
 .comment div{
-    float: right;
     width: 80%;
+    margin-left: 80px;
 }
 
-hr{
-    margin-bottom: -12px;
-}
 #ask-question, #not-signed-in{
     color: black;
     padding: 10px;
     background-color: lightgreen;
     border-radius: 5px;
-    margin: 0 auto;
+    margin-left: 25px;
+    width: 90%;
+}
+#not-signed-in{
+    background-color: rosybrown;
 }
 
 
 #question-title{
     font-size: 15pt;
     margin-left: 10px;
+    margin-bottom: -5px;
     text-decoration: underline;
+    color: black;
 }
 
 #content{
@@ -129,4 +161,28 @@ hr{
     opacity: 1.0;
     color: red;
     text-decoration: underline;
+}
+
+.rating{
+    width: 10px;
+    text-align: left;
+    box-shadow: none;
+    margin-left: -10px;
+    margin-right: 15px;
+    margin-top: 0px;
+    float: left;
+    background-color: transparent;
+}
+
+input[name="1"]{
+    background-image: url('res/up.png');
+    background-size: 18px 18px;
+    background-repeat: no-repeat;
+    border: 0px;
+    background-color: transparent;
+}
+
+input[value="Odgovori"]{
+    padding: 5px;
+    width: 30%;
 }

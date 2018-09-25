@@ -1,7 +1,6 @@
 <?php
     include_once './header.php';
 ?>
-<div class="center">
 <form action="insert_question.php" method="POST">
     <input type="text" name="title" placeholder="Naslov vprasanja" required="required"/>
     <br/>
@@ -22,7 +21,6 @@
     <br/>
     <input type="submit" value="vprasaj"/>
 </form>
-</div>
 <?php
     include_once './footer.php';
 ?>

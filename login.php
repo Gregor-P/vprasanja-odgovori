@@ -1,5 +1,7 @@
 <?php
     include_once './header.php';
+    
+    include_once './googleLogin.php';
 ?>
 
 <h1>Prijava</h1>
