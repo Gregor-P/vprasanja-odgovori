@@ -13,10 +13,10 @@
     
     if(isset($_SESSION['user_id'])){
         if(isset($_SESSION['username'])){
-            echo 'Pozdravljeni <a href="user.php">' . $_SESSION['username'] . '</a>';
+            echo 'Pozdravljeni <a href="index.php">' . $_SESSION['username'] . '</a>';
         }
         else {
-            echo 'Pozdravljeni <a href="user.php">' . $_SESSION['first_name'] ." ". $_SESSION['last_name'] . '</a>';
+            echo 'Pozdravljeni <a href="index.php">' . $_SESSION['first_name'] ." ". $_SESSION['last_name'] . '</a>';
         }
 
         if(isset($_SESSION['admin']) && $_SESSION['admin'] == 1){

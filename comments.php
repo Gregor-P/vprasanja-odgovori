@@ -48,14 +48,19 @@ function commentBlock(PDO $pdo, $row, $isReply = 0, $onIndex = 0){
     if(isset($_SESSION['user_id'])){ 
         
         if($row['user_id']==$_SESSION['user_id'] || $_SESSION['admin'] == 1){
-            echo '<a style="float: right;" href="delete_comment.php?id='. $row['post_id'] .'">izbriši</a>';
+            echo '<a style="float: right;" href="delete_comment.php?id='. $row['post_id'] .'"> X </a>';
             echo '<br/>';
         } 
     }
   
     echo '<p id="content">' . $row['content'] . '</p>';     //content
     echo '<p id="user-time">';                                  //user-time
+    if($_SESSION['google'] == 'google'){
+            echo '<a href="">' . $row['first_name'] . " " . $row['last_name'] . '</a> | '.$row['timestamp'];
+    }
+    else{
     echo '<a href="">' . $row['username'] . '</a> | '.$row['timestamp'];
+    }
     echo '</p> </div>';
     if($isReply == 1){
         echo '</span>';

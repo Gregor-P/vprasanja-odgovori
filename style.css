@@ -7,7 +7,7 @@ body{
 
 .center{
     margin: -18px auto;
-    width: 60%;
+    width: 70%;
     min-width: 540px;
     min-height: 1080px;
     padding-top: 110px;
@@ -15,20 +15,35 @@ body{
     z-index: -1;
     float: left;
     position: absolute;
+    box-shadow: 3px 3px 3px #9f9f9f;
 }
 
 #side-bar{
     float: right;
     padding-top: 110px;
     min-height: 1080px;
-    width: 30%;
+    width: 290px;
     background-color: gainsboro;
     color: black;
+    box-shadow: -3px -3px 3px #9f9f9f;
 }
+
+h3{
+    margin-left: 15px;
+    color: #161930;
+}
+
+img{
+    margin: 5px;
+    height: 40%;
+    width: 40%;
+}
+
+
 
 nav#header{
     margin-top: 0;
-    background-color: #161930;
+    background-color: #191e35;
     color: lightgrey;
     width: 100%;
     height: 20px;
@@ -44,7 +59,7 @@ nav#header{
 }
 
 .header-btn:hover{
-    background-color: #2f2f2f;
+    background-color: #111428;
 }
 
 #topics-bar{
@@ -52,23 +67,32 @@ nav#header{
     width: 111%;
     margin-left: -10px;
     position: fixed;
+    height: 30px;
 }
 
 .topic{
     text-align: center;
     color: #f0f0f0;
-    padding: 10px;
+    padding: 5px 10px 5px 10px;
     background-color: #111428;
     display: inline-block;
 }
 
 .topic:hover{
-    background-color: #161930;
+    background-color: #191e35;
 }
 
 a{
     color: orangered;
     text-decoration: none;
+}
+
+a:hover{
+    text-decoration: underline;
+}
+
+li{
+    margin-bottom: 5px;
 }
 
 .logout-btn{
@@ -119,7 +143,7 @@ textarea, input, select{
     min-width: 470px;
     max-width: 750px;
     background-color: white;
-    box-shadow: 0px 0px 10px  #9f9f9f;
+    box-shadow: 0px 0px 5px  #9f9f9f;
 }
 
 .comment div{
@@ -148,11 +172,17 @@ textarea, input, select{
     color: black;
 }
 
+#question-title:hover{
+    color: orangered;
+}
+
 #content{
     margin-left: 25px;
+    white-space: pre-wrap;
 }
 
 #user-time{
+    font-family: courier;
     font-style: italic;
     opacity: 0.6;
 }
@@ -172,6 +202,11 @@ textarea, input, select{
     margin-top: 0px;
     float: left;
     background-color: transparent;
+}
+
+.votes-num{
+        font-family: courier;
+    font-size: 15pt;
 }
 
 input[name="1"]{

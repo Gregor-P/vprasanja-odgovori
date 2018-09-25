@@ -17,13 +17,14 @@ if(isset($_SESSION['user_id'])){
         $stmt = $pdo->prepare("SELECT *,p.id AS post_id FROM posts p"
                             . " INNER JOIN users u ON u.id = p.user_id"
                             . " WHERE topic_id IS NOT NULL"
-                            . " ORDER BY p.timestamp");
+                            . " ORDER BY p.timestamp DESC");
         $stmt->execute();
     }
     else{
         $stmt = $pdo->prepare("SELECT *,p.id AS post_id FROM posts p"
                             . " INNER JOIN users u ON u.id = p.user_id"
-                            . " WHERE topic_id=?");
+                            . " WHERE topic_id=? "
+                            . " ORDER BY p.timestamp DESC");
         $stmt->execute([$_GET['izbrano']]);
     }
     
