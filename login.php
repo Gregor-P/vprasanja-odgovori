@@ -1,6 +1,11 @@
 <?php
     include_once './header.php';
     
+    if(isset($_SESSION['user_id'])){
+        header("Location: index.php");
+    }
+    
+    
     include_once './googleLogin.php';
 ?>
 

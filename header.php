@@ -12,12 +12,18 @@
 <?php
     
     if(isset($_SESSION['user_id'])){
-        echo 'Pozdravljeni <a href="user.php">' . $_SESSION['username'] . '</a>';
+        if(isset($_SESSION['username'])){
+            echo 'Pozdravljeni <a href="user.php">' . $_SESSION['username'] . '</a>';
+        }
+        else {
+            echo 'Pozdravljeni <a href="user.php">' . $_SESSION['first_name'] ." ". $_SESSION['last_name'] . '</a>';
+        }
 
-        if($_SESSION['admin'] == 1){
+        if(isset($_SESSION['admin']) && $_SESSION['admin'] == 1){
             echo '<i>(admin)</i>';
         }
         echo '<a href="index.php" class="header-btn">Domov</a>';
+        
         echo '<a href="logout.php" class="logout-btn">Izpis </a>';
         
         

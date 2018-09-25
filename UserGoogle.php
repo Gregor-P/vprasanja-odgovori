@@ -27,7 +27,7 @@ class User {
                                 . "WHERE oauth_provider = ? "
                                 . "AND oauth_uid = ?;");
             $stmt->execute([$userData['oauth_provider'], $userData['oauth_uid']]);
-            $row = $stmt->fetchI();
+            $row = $stmt->fetch();
             if($row){
                 //Update user data if already exists
                 $stmt = "UPDATE users "
@@ -44,12 +44,11 @@ class User {
             //Get user data from the database
             //$result = $this->db->query($prevQuery);
             //$userData = $result->fetch_assoc();
-        }
+            
+            }
         
         //Return user data
         return $userData;
-		//SQL stavek da dobiš id od emajla!
-		//$_SESSION[''] = $row['user_id'];
     }
 }
 ?>

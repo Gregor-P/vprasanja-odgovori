@@ -41,6 +41,16 @@ if ($gClient->getAccessToken()) {
         $output .= '<br/>Name : ' . $userData['first_name'].' '.$userData['last_name'];
         $output .= '<br/>Email : ' . $userData['email'];
         $output .= '<br/>Logout from <a href="logout.php">Google</a>'; 
+        
+        $stmtID = $pdo->prepare("SELECT * FROM users WHERE oauth_uid = ?");
+        $stmtID->execute([$userData['oauth_uid']]);
+        $rowID = $stmtID->fetch(PDO::FETCH_ASSOC);
+        
+        $_SESSION['user_id'] = $rowID['id'];
+        $_SESSION['google'] = $rowID['oauth_provider'];
+        $_SESSION['first_name'] = $rowID['first_name'];
+        $_SESSION['last_name'] = $rowID['last_name'];
+        
     }else{
         $output = '<h3 style="color:red">Some problem occurred, please try again.</h3>';
     }
@@ -52,7 +62,6 @@ if ($gClient->getAccessToken()) {
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Login with Google using PHP by CodexWorld</title>
 <style type="text/css">
 h1{font-family:Arial, Helvetica, sans-serif;color:#999999;}
 </style>
