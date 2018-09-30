@@ -34,7 +34,7 @@
         echo '<a href="login.php" class="header-btn"> Prijava </a>';
     }
     if($_SERVER['REQUEST_URI'] == "/vprasanja-odgovori/index.php" || isset($_GET['izbrano'])){
-    include_once './topic_bar.php';
+        include_once './topic_bar.php';
     }
    
 ?>
@@ -45,4 +45,3 @@
     }
     ?>
     <nav class="center">
-    

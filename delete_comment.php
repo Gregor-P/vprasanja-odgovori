@@ -21,9 +21,4 @@ else{
     $stmtThree->execute([$post_id,$user_id]);
 }
 
-
-
-
-
-
 header("Location: ".$_SERVER['HTTP_REFERER']);

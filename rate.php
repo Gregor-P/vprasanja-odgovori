@@ -22,5 +22,10 @@ if($row){
         $stmt->execute([1,$post_id, $user_id]);
     }
 }
+else{
+        $stmt = $pdo->prepare("INSERT INTO users_posts(user_id, post_id, subscribed, rating) "
+                            . "VALUES (?,?,?,?)");
+        $stmt->execute([$user_id, $post_id, 0, 1]);
+}
 
 header("Location: ". $_SERVER['HTTP_REFERER']);

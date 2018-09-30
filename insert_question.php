@@ -11,4 +11,9 @@ $stmt = $pdo->prepare("INSERT INTO posts (title,content,topic_id,user_id) "
         $stmt->execute([$title,$content,$topic_id,$user_id]);
         
 $id = $pdo->lastInsertId();
+
+$stmtRel = $pdo->prepare("INSERT INTO users_posts(post_id, user_id, rating, subscribed) "
+                       . " VALUES(?,?,?,?)");
+$stmtRel->execute([$id, $user_id, 1, 0]);
+
 header('Location: display_question.php?id='.$id);

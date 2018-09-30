@@ -9,7 +9,6 @@
     include_once './googleLogin.php';
 ?>
 
-<h1>Prijava</h1>
 
 <form action="login_check.php" method="post">
     <label>E-pošta: </label>

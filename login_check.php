@@ -23,7 +23,7 @@
             $_SESSION['username']    =      $row['username' ];
             $_SESSION['email'   ]    =      $row['email'    ];
             $_SESSION['admin'   ]    =      $row['admin'    ];
-
+            $_SESSION['google'] = 0;
             //preusmeritev na login
             header("Location: index.php");
         }

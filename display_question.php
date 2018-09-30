@@ -20,18 +20,15 @@ if(!$row){ //če post ne obstaja te vrne na index oz. če query ni uspel
 }
 
 echo '<a id="post-topic" href="index.php?izbrano='.$row['topic_id'].'"> << Nazaj na '.$row['topic_name'].'</a>'; 
-echo '<br/><br/>';
 echo '<a id="sub" href="subscribe.php?post_id='.$id.'"> ⭐Sledi temu vprašanju </a>'; 
 
 commentBlock($pdo, $row);
 
-
-
-if(isset($_SESSION['user_id'])){
-    $user_id = $_SESSION['user_id'];
-
+if(isset($_SESSION['user_id']) && $row['user_id'] != $_SESSION['user_id']){
     //če še ne obstaja ustvari row v tabeli users_posts, kjer se lahko
     //zapiše če je user všečkal objavo in ali je subscrajban 
+    //samo če user ni tisti ki je to objavo ustvaril, v katerem primeru relacija že obsstaja
+    $user_id = $_SESSION['user_id'];
     
     $stmt = $pdo->prepare("SELECT post_id FROM users_posts WHERE user_id=? AND post_id=?");
     $stmt->execute([$user_id, $id]);
@@ -41,8 +38,9 @@ if(isset($_SESSION['user_id'])){
         $stmt = $pdo->prepare("INSERT INTO users_posts(user_id, post_id, subscribed) VALUES (?,?,?)");
         $stmt->execute([$user_id, $id, 0]);
     }
-    commentForm($id);
-    
-    displayComments($pdo, $id);
-
 }
+
+
+commentForm($id);
+
+displayComments($pdo, $id);

@@ -5,9 +5,11 @@
 
     if($_SESSION['google'] == 'google'){
         //Unset token and user data from session
+        
         unset($_SESSION['token']);
         unset($_SESSION['userData']);
         //Reset OAuth access token
+        
         $gClient->revokeToken();
     }
     

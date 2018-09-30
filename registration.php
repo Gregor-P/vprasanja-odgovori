@@ -2,7 +2,6 @@
     include_once './header.php';
 
 ?>
-<h1>Registracija</h1>
 
 <form action="user_insert.php" method="post">
     <input type="text" name="username" placeholder="Uporabniško ime *" required="required" /> 

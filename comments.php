@@ -18,12 +18,12 @@ function commentForm($answer_id){                 //prikaže form za pisanje kom
 }
 
 function upvoteForm($post_id){
-        if(isset($_SESSION['user_id'])){
-        echo '  <form class="rating" action="rate.php" method="POST">
-                    <input type="hidden" name="post_id" value="'. $post_id.'" />
-                    <input type="submit" name="1" value=" " />
-                </form>';
-        }
+    if(isset($_SESSION['user_id'])){
+    echo '  <form class="rating" action="rate.php" method="POST">
+                <input type="hidden" name="post_id" value="'. $post_id.'" />
+                <input type="submit" name="1" value=" " />
+            </form>';
+    }
 }
 
 function commentBlock(PDO $pdo, $row, $isReply = 0, $onIndex = 0){   
@@ -40,26 +40,25 @@ function commentBlock(PDO $pdo, $row, $isReply = 0, $onIndex = 0){
         if($onIndex == 0){
             upvoteForm($row['post_id']);
         }
-        echo '<span class="votes-num">'. $vote_count[0] . '</span> | ';
+        echo '<span class="votes-num">'. $vote_count[0] . '</span> ';
         echo '<a id="question-title" href="display_question.php?id='.$row['post_id'].'">'. $row['title']. '</a>';
     }
     
     
-    if(isset($_SESSION['user_id'])){ 
-        
+    if(isset($_SESSION['user_id'])){  
         if($row['user_id']==$_SESSION['user_id'] || $_SESSION['admin'] == 1){
             echo '<a style="float: right;" href="delete_comment.php?id='. $row['post_id'] .'"> X </a>';
             echo '<br/>';
         } 
     }
   
-    echo '<p id="content">' . $row['content'] . '</p>';     //content
+    echo '<p id="content">' . $row['content'] . '</p>';         //content
     echo '<p id="user-time">';                                  //user-time
-    if($_SESSION['google'] == 'google'){
+    if($row['username'] == NULL){
             echo '<a href="">' . $row['first_name'] . " " . $row['last_name'] . '</a> | '.$row['timestamp'];
     }
     else{
-    echo '<a href="">' . $row['username'] . '</a> | '.$row['timestamp'];
+        echo '<a href="">' . $row['username'] . '</a> | '.$row['timestamp'];
     }
     echo '</p> </div>';
     if($isReply == 1){
@@ -67,28 +66,27 @@ function commentBlock(PDO $pdo, $row, $isReply = 0, $onIndex = 0){
     }
 }
 
-
 function displayComments(PDO $pdo, $post_id){
-    $stmt = $pdo->prepare("SELECT *, a.id AS post_id FROM posts a "
-                        . "INNER JOIN users u ON u.id = a.user_id "
-                        . "INNER JOIN users_posts p ON p.post_id = a.id "
-                        . "WHERE parent_id =? "
-                        . "ORDER BY count(p.id) DESC");
+    
+    $stmt = $pdo->prepare("SELECT *, p.id AS post_id FROM posts p "
+            . "INNER JOIN users u ON u.id = p.user_id "
+            //. "INNER JOIN users_posts r ON r.post_id = p.id "
+            . "WHERE p.parent_id = ? ");
+            //. "ORDER BY count(r.id) DESC");
     $stmt->execute([$post_id]);
-
-    while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
-        if(isset($row['content'])){ //grd bug fix, izpisovalo je prazn form zaradi inner joina z users_posts
-            commentBlock($pdo, $row);
-            $stmtNew = $pdo->prepare("SELECT *,a.id AS post_id FROM posts a "
-                                . "INNER JOIN users u ON u.id = a.user_id "
-                                . "WHERE parent_id =?");
-            $stmtNew->execute([$row['post_id']]);
-            while($replies = $stmtNew->fetch(PDO::FETCH_ASSOC)){
-                commentBlock($pdo, $replies, 1);
-            }
-            commentForm($row['post_id']);
+    
+    while($odgovori = $stmt->fetch(PDO::FETCH_ASSOC)){
+        commentBlock($pdo, $odgovori);
+        
+        $stmtNew = $pdo->prepare("SELECT *, p.id AS post_id FROM posts p "
+                                ."INNER JOIN users u ON u.id = p.user_id "
+                                ."WHERE p.parent_id = ?");
+        $stmtNew->execute([$odgovori['post_id']]);
+        
+        while($odgovoriNew = $stmtNew->fetch(PDO::FETCH_ASSOC)){
+            commentBlock($pdo, $odgovoriNew,1);
         }
-   }
+        
+        commentForm($odgovori['post_id']);
+    }
 }
-
-
