@@ -212,14 +212,6 @@ textarea, input, select{
     font-size: 17pt;
 }
 
-input[name="1"]{
-    background-image: url('res/up.png');
-    background-size: 18px 18px;
-    background-repeat: no-repeat;
-    border: 0px;
-    background-color: transparent;
-}
-
 input[value="Odgovori"]{
     padding: 5px;
     width: 30%;
@@ -266,4 +258,22 @@ form[action="insert_comment.php"]{
     text-decoration: none;
     background-color: white;
     color: #252e54;
+}
+
+input[value="1"]{
+    background-image: url(res/up.png);
+    background-size: 20px 20px;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    border: none;
+    color: transparent;
+}
+
+input[value="-1"]{
+    background-image: url(res/down.png);
+    background-size: 20px 20px;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    border: none;
+    color: transparent;
 }

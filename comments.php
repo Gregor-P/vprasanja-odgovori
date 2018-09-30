@@ -6,14 +6,15 @@ include_once './session.php';
 function commentForm($answer_id){                 //prikaže form za pisanje komentarja
     if(isset($_SESSION['user_id'])){
         echo '
-
+        <div class="toggle">
         <form action="insert_comment.php" method="POST">
             <input type="hidden" name="parent_id" value="'. $answer_id .'"/>
 
             <textarea required="required" id="comment-field" name="comment" rows="3" cols="50" style="resize:none;"></textarea>
             <br/>
             <input type="submit" value="Odgovori"/>
-        </form>';
+        </form>
+        </div>';
     }
 }
 
@@ -21,7 +22,8 @@ function upvoteForm($post_id){
     if(isset($_SESSION['user_id'])){
     echo '  <form class="rating" action="rate.php" method="POST">
                 <input type="hidden" name="post_id" value="'. $post_id.'" />
-                <input type="submit" name="1" value=" " />
+                <input type="submit" name="rating" value="1" />
+                <input type="submit" name="rating" value="-1" />
             </form>';
     }
 }
@@ -67,7 +69,6 @@ function commentBlock(PDO $pdo, $row, $isReply = 0, $onIndex = 0){
 }
 
 function displayComments(PDO $pdo, $post_id){
-    
     $stmt = $pdo->prepare("SELECT *, p.id AS post_id FROM posts p "
             . "INNER JOIN users u ON u.id = p.user_id "
             //. "INNER JOIN users_posts r ON r.post_id = p.id "
