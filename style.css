@@ -261,19 +261,18 @@ form[action="insert_comment.php"]{
 }
 
 input[value="1"]{
-    background-image: url(res/up.png);
+    background:  url(res/up.png) no-repeat transparent;
     background-size: 20px 20px;
-    background-repeat: no-repeat;
-    background-color: transparent;
     border: none;
     color: transparent;
+    margin: -10px 0 0 0;
 }
 
 input[value="-1"]{
-    background-image: url(res/down.png);
+    background:  url(res/down.png) no-repeat transparent;
     background-size: 20px 20px;
-    background-repeat: no-repeat;
-    background-color: transparent;
     border: none;
     color: transparent;
+    margin: 0;
+    margin-top: -10px;
 }

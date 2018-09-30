@@ -32,14 +32,14 @@ else{
     }
     
     $string = "SELECT *,p.id AS post_id FROM posts p"
-            . " INNER JOIN users u ON u.id = p.user_id"
-            . " INNER JOIN users_posts s ON s.post_id = p.id"
+            . " INNER JOIN users u ON u.id = p.user_id "
+            //. " INNER JOIN users_posts s ON s.post_id = p.id"
             . $izbrano . " AND parent_id IS NULL";
     
     
     switch ($sortBy){
         case 'rating':
-            $string = $string . " ORDER BY sum(s.id) DESC";
+            $string = $string . " ORDER BY ratings DESC";
             break;
         case 'time':
             $string = $string . " ORDER BY p.timestamp DESC";

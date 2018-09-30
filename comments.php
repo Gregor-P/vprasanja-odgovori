@@ -33,16 +33,11 @@ function commentBlock(PDO $pdo, $row, $isReply = 0, $onIndex = 0){
         echo '<span class="comment"><div class="question-block">';
     }
     else{
-        $stmt = $pdo->prepare("SELECT count(id) FROM users_posts "
-                    . "WHERE post_id = ? "
-                    . "AND rating = 1");
-        $stmt->execute([$row['post_id']]);
-        $vote_count = $stmt->fetch(PDO::FETCH_NUM);
         echo '<div class="question-block">'; 
         if($onIndex == 0){
             upvoteForm($row['post_id']);
         }
-        echo '<span class="votes-num">'. $vote_count[0] . '</span> ';
+        echo '<span class="votes-num">'. $row['ratings'] . '</span> ';
         echo '<a id="question-title" href="display_question.php?id='.$row['post_id'].'">'. $row['title']. '</a>';
     }
     
