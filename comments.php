@@ -10,7 +10,7 @@ function commentForm($answer_id){                 //prikaže form za pisanje kom
         <form action="insert_comment.php" method="POST">
             <input type="hidden" name="parent_id" value="'. $answer_id .'"/>
 
-            <textarea required="required" id="comment-field" name="comment" rows="3" cols="50" style="resize:none;"></textarea>
+            <textarea required="required" id="comment-field" name="comment" rows="3" cols="50"></textarea>
             <br/>
             <input type="submit" value="Odgovori"/>
         </form>
@@ -30,7 +30,7 @@ function upvoteForm($post_id){
 
 function commentBlock(PDO $pdo, $row, $isReply = 0, $onIndex = 0){   
     if($isReply == 1){
-        echo '<span class="comment"><div class="question-block">';
+        echo '<div class="reply-block" style="margin-left: 50px">';
     }
     else{
         echo '<div class="question-block">'; 
@@ -45,7 +45,6 @@ function commentBlock(PDO $pdo, $row, $isReply = 0, $onIndex = 0){
     if(isset($_SESSION['user_id'])){  
         if($row['user_id']==$_SESSION['user_id'] || $_SESSION['admin'] == 1){
             echo '<a style="float: right;" href="delete_comment.php?id='. $row['post_id'] .'"> X </a>';
-            echo '<br/>';
         } 
     }
   
@@ -59,7 +58,7 @@ function commentBlock(PDO $pdo, $row, $isReply = 0, $onIndex = 0){
     }
     echo '</p> </div>';
     if($isReply == 1){
-        echo '</span>';
+        echo '';
     }
 }
 
@@ -67,8 +66,8 @@ function displayComments(PDO $pdo, $post_id){
     $stmt = $pdo->prepare("SELECT *, p.id AS post_id FROM posts p "
             . "INNER JOIN users u ON u.id = p.user_id "
             //. "INNER JOIN users_posts r ON r.post_id = p.id "
-            . "WHERE p.parent_id = ? ");
-            //. "ORDER BY count(r.id) DESC");
+            . "WHERE p.parent_id = ? "
+            . "ORDER BY p.ratings DESC");
     $stmt->execute([$post_id]);
     
     while($odgovori = $stmt->fetch(PDO::FETCH_ASSOC)){

@@ -34,15 +34,18 @@
         echo '<a href="registration.php" class="header-btn"> Registracija </a>';
         echo '<a href="login.php" class="header-btn"> Prijava </a>';
     }
-    if($_SERVER['REQUEST_URI'] == "/vprasanja-odgovori/index.php" || isset($_GET['izbrano'])){
+    $s = $_SERVER['REQUEST_URI']; //zarad lepšga
+    if($s == "/vprasanja-odgovori/index.php" || $s == "/vprasanja-odgovori/" || isset($_GET['izbrano'])){
         include_once './topic_bar.php';
     }
    
 ?>
     </nav>
+
+    <div class="center">
+        
     <?php 
     if(isset($_SESSION['user_id'])){
         include_once './side_bar.php';
     }
-    ?>
-    <nav class="center">
+    

@@ -12,34 +12,27 @@ else{
     $izbrano = " WHERE topic_id = ". $_GET['izbrano'];
 }
 
-
 if(isset($_GET['sortBy'])){
     $sortBy = $_GET['sortBy'];
-    echo $sortBy;
 }
 else{
     $sortBy = 'rating';
 }
 
-
-
-
-
     if(isset($_SESSION['user_id'])){
-        echo '<p id="ask-question"><a href="add_question.php"> VPRAŠAJ NEKAJ </a></p>';
+        echo '<a class="ask-question" href="add_question.php"> vprašaj kaj</a>';
     }else{
-        echo '<p id="not-signed-in"> Prijavi se če hočeš kaj vprašati </p>';
+        echo '<a href="login.php" class="ask-question" id="not-signed-in"> Prijavi se! </a>';
     }
     
-    $string = "SELECT *,p.id AS post_id FROM posts p"
-            . " INNER JOIN users u ON u.id = p.user_id "
-            //. " INNER JOIN users_posts s ON s.post_id = p.id"
+    $string = "SELECT *,p.id AS post_id FROM posts p"           //ustvari sql string in mu doda izbiro teme
+            . " INNER JOIN users u ON u.id = p.user_id "       
             . $izbrano . " AND parent_id IS NULL";
     
     
-    switch ($sortBy){
+    switch ($sortBy){                                           //glede na izbiro še doda sortiranje vprašanj
         case 'rating':
-            $string = $string . " ORDER BY ratings DESC";
+            $string = $string . " ORDER BY ratings DESC";       //TODO: ASC in DESC
             break;
         case 'time':
             $string = $string . " ORDER BY p.timestamp DESC";
