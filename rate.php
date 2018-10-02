@@ -5,7 +5,9 @@ include_once './session.php';
 $user_id = $_SESSION['user_id'];
 $post_id = $_POST['post_id'];
 $rating = $_POST['rating'];
-echo $rating;
+/* skript za rating objav, če dobi signal za rating ki je že vpisan, ga bo spremenilo na 0,
+ * na koncu sešteje vse rainge in jih vpiše v tabelo posts, za kasnejše lažje sortiranje
+ */
 
 $stmt = $pdo->prepare("SELECT * FROM users_posts WHERE user_id=? AND post_id=?");
 $stmt->execute([$user_id,$post_id]);

@@ -28,7 +28,11 @@ function upvoteForm($post_id){
     }
 }
 
-function commentBlock(PDO $pdo, $row, $isReply = 0, $onIndex = 0){   
+function commentBlock($row, $isReply = 0, $onIndex = 0){   
+    /* Template za izpis objav
+     * Obstajajo manjše razlike glede na to kje se objava nahaja,
+     * zato funkcija zahteva še nekaj parametrov 
+     */
     if($isReply == 1){
         echo '<div class="reply-block" style="margin-left: 50px">';
     }

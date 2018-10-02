@@ -25,21 +25,20 @@ else{
         echo '<a href="login.php" class="ask-question" id="not-signed-in"> Prijavi se! </a>';
     }
     
-    $string = "SELECT *,p.id AS post_id FROM posts p"           //ustvari sql string in mu doda izbiro teme
+    $string = "SELECT *,p.id AS post_id FROM posts p"                           //ustvari sql string za pridobitev objav in mu doda izbiro teme
             . " INNER JOIN users u ON u.id = p.user_id "       
             . $izbrano . " AND parent_id IS NULL";
     
     
-    switch ($sortBy){                                           //glede na izbiro še doda sortiranje vprašanj
+    switch ($sortBy){                                                           //glede na izbiro še doda sortiranje vprašanj
         case 'rating':
-            $string = $string . " ORDER BY ratings DESC";       //TODO: ASC in DESC
+            $string = $string . " ORDER BY ratings DESC";       
             break;
         case 'time':
             $string = $string . " ORDER BY p.timestamp DESC";
             break;
     }
     $stmt = $pdo->prepare($string);
-
     $stmt->execute();
 
 
