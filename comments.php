@@ -30,7 +30,7 @@ function upvoteForm($post_id){
 
 function commentBlock(PDO $pdo, $row, $isReply = 0, $onIndex = 0){   
     if($isReply == 1){
-        echo '<span class="comment"><div class="question-block">';
+        echo '<div class="reply-block" class="question-block">';
     }
     else{
         echo '<div class="question-block">'; 
@@ -57,9 +57,7 @@ function commentBlock(PDO $pdo, $row, $isReply = 0, $onIndex = 0){
         echo '<a href="">' . $row['username'] . '</a> | '.$row['timestamp'];
     }
     echo '</p> </div>';
-    if($isReply == 1){
-        echo '</span>';
-    }
+
 }
 
 function displayComments(PDO $pdo, $post_id){

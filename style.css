@@ -6,9 +6,6 @@ body{
     height: 100%;
 }
 
-html, .center, #side-bar{
-    min-height: 100%;
-}
 
 @media (max-width: 900px){
     .center {
@@ -40,7 +37,7 @@ html, .center, #side-bar{
 
 .question-block, .reply-block{
     float: left;
-    margin: 10px 0 0 25px;
+    margin: 20px 0 0 25px;
     padding: 15px 15px 5px 15px;
     width: 90%;
     min-width: 470px;
@@ -49,6 +46,11 @@ html, .center, #side-bar{
     border-left: 2px solid gray;
 }
 
+.reply-block{
+    margin-left: 50px;
+    min-width: 420px;
+    max-width: 600px;
+}
 
 nav#header{
     margin-top: 15px;
@@ -123,9 +125,11 @@ li{
 }
 
 form{
-    float: right;
-    margin: 0 auto;
+    border-radius: 4px;
+    padding: 20px;
+    float: left;
     margin-bottom: -25px;
+    margin-left: 50px;
     background-color: transparent;
     width: 500px;
 }
@@ -145,7 +149,7 @@ input[type="submit"]{
 
 textarea, input, select{
     font-size: 12pt;
-    margin: 2px;
+    
     padding: 10px;
     border-radius: 2px;
     box-shadow: none;
@@ -270,4 +274,9 @@ input[value="-1"]{
     border: none;
     color: transparent;
     margin: -10px 0 0 0;
+}
+
+ .center, #side-bar{
+    min-height: 100%;
+    height: 200%;
 }
