@@ -10,7 +10,7 @@ function commentForm($answer_id){                 //prikaže form za pisanje kom
         <form action="insert_comment.php" method="POST">
             <input type="hidden" name="parent_id" value="'. $answer_id .'"/>
 
-            <textarea required="required" id="comment-field" name="comment" rows="3" cols="50"></textarea>
+            <textarea required="required" id="comment-field" name="comment" rows="3" cols="50" style="resize:none;"></textarea>
             <br/>
             <input type="submit" value="Odgovori"/>
         </form>
@@ -28,13 +28,9 @@ function upvoteForm($post_id){
     }
 }
 
-function commentBlock($row, $isReply = 0, $onIndex = 0){   
-    /* Template za izpis objav
-     * Obstajajo manjše razlike glede na to kje se objava nahaja,
-     * zato funkcija zahteva še nekaj parametrov 
-     */
+function commentBlock(PDO $pdo, $row, $isReply = 0, $onIndex = 0){   
     if($isReply == 1){
-        echo '<div class="reply-block" style="margin-left: 50px">';
+        echo '<span class="comment"><div class="question-block">';
     }
     else{
         echo '<div class="question-block">'; 
@@ -62,7 +58,7 @@ function commentBlock($row, $isReply = 0, $onIndex = 0){
     }
     echo '</p> </div>';
     if($isReply == 1){
-        echo '';
+        echo '</span>';
     }
 }
 
@@ -71,7 +67,7 @@ function displayComments(PDO $pdo, $post_id){
             . "INNER JOIN users u ON u.id = p.user_id "
             //. "INNER JOIN users_posts r ON r.post_id = p.id "
             . "WHERE p.parent_id = ? "
-            . "ORDER BY p.ratings DESC");
+            . "ORDER BY ratings DESC");
     $stmt->execute([$post_id]);
     
     while($odgovori = $stmt->fetch(PDO::FETCH_ASSOC)){
