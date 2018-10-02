@@ -10,7 +10,7 @@ function commentForm($answer_id){                 //prikaže form za pisanje kom
         <form action="insert_comment.php" method="POST">
             <input type="hidden" name="parent_id" value="'. $answer_id .'"/>
 
-            <textarea required="required" id="comment-field" name="comment" rows="3" cols="50" style="resize:none;"></textarea>
+            <textarea required="required" id="comment-field" name="comment" rows="3" cols="50"></textarea>
             <br/>
             <input type="submit" value="Odgovori"/>
         </form>

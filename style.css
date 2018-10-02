@@ -7,9 +7,13 @@ body{
 }
 
 
-@media (max-width: 900px){
+@media (max-width: 400px){
     .center {
         width: 100%;
+    }
+    
+    #side-bar{
+        display: none;
     }
 }
 

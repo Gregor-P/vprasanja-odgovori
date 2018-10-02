@@ -18,12 +18,12 @@ include_once './database.php';
 ?>
     <h3>Vprašanja ki jim sledite:</h3>
 <?php
-    $stmt = $pdo->prepare("SELECT * FROM posts p"
+    $stmtTwo = $pdo->prepare("SELECT * FROM posts p"
             . " INNER JOIN users_posts u ON u.post_id = p.id"
-            . " WHERE subscribed = 1");
-    $stmt->execute();
+            . " WHERE subscribed = 1 AND u.user_id = ?");
+    $stmtTwo->execute([$_SESSION['user_id']]);
     echo '<ul>';
-    while($row=$stmt->fetch(PDO::FETCH_ASSOC)){
+    while($row=$stmtTwo->fetch(PDO::FETCH_ASSOC)){
         echo '<li><a href="display_post.php?id='.$row['post_id'].'">'.$row['title'].'</a></li>';
     }
     echo '</ul>';
